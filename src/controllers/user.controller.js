@@ -65,7 +65,6 @@ const registerUser = asyncHandler(async (req, res, next) => {
 const loginUser = asyncHandler(async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        console.log(email, password);
         
     
         if (!email || !password) {
@@ -103,7 +102,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
             .json(new ApiResponse(200, {user, accessToken, refreshToken}, "User logged in successfully"));
     } catch (error) {
         console.log(error);
-        return next(new ApiError(500, "Something went wrong while logging in user", error));        
+        return new ApiError(500, "Something went wrong while logging in user", error);        
     }
 });
 

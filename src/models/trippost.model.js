@@ -1,17 +1,16 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const tripPostSchema = new Schema({
-  organizer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  destination: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Destination',
-    required: true,
-  },
-  dateRange: {
+const tripPostSchema = new Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    destination: {
+      type: String, // Store as a string instead of ObjectId
+      required: true,
+    },
     startDate: {
       type: Date,
       required: true,
@@ -20,24 +19,38 @@ const tripPostSchema = new Schema({
       type: Date,
       required: true,
     },
+    companionsNeeded: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["upcoming", "completed"],
+      required: true,
+      default: "upcoming",
+    },
+    interestedUsers: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        comment: { type: String },
+      },
+    ],
+    postedDate: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  maxPeople: {
-    type: Number,
-    required: true,
-  },
-  currentPeople: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  }],
-  status: {
-    type: String,
-    enum: ['open', 'closed'],
-    default: 'open',
-  },
-}, {
-  timestamps: true
-});
+  {
+    timestamps: true,
+  }
+);
 
-const TripPost = mongoose.model('TripPost', tripPostSchema);
-
+const TripPost = mongoose.model("TripPost", tripPostSchema);
 export default TripPost;

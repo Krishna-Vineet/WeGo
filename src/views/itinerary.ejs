@@ -121,29 +121,6 @@
                               <span class="activity-description">Went to the zoo</span>
                               <button class="remove-btn">Remove</button>
                             </div>
-                        </div>
-                        <div class="day-section">
-                            <h3>Day 3</h3>
-                            <div class="activity">
-                              <span class="activity-time">09:00 AM</span>
-                              <span class="activity-description">Visit a museum</span>
-                              <button class="remove-btn">Remove</button>
-                            </div>
-                            <div class="activity">
-                              <span class="activity-time">10:00 AM</span>
-                              <span class="activity-description">Try street food</span>
-                              <button class="remove-btn">Remove</button>
-                            </div>
-                            <div class="activity">
-                              <span class="activity-time">12:00 PM</span>
-                              <span class="activity-description">Explore the temple</span>
-                              <button class="remove-btn">Remove</button>
-                            </div>
-                            <div class="activity">
-                              <span class="activity-time">02:00 PM</span>
-                              <span class="activity-description">Went to the zoo</span>
-                              <button class="remove-btn">Remove</button>
-                            </div>
                         </div> -->
                     </div>
                 </div>
@@ -155,33 +132,13 @@
             <div class="map-container">
                 <h3>Map</h3>
                 <div id="map"></div>
-                <!-- <img id="mapImage" src="" alt="Map Image" style="display: none;"> -->
-                <!-- <img src="/img/map-placeholder.png" alt="Map"> -->
-                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d14028.440630985726!2d76.99886634548976!3d28.47622899750956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1shotels!5e0!3m2!1sen!2sin!4v1725332978781!5m2!1sen!2sin" width="300" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-            </div>
+             </div>
             <div class="redirects">
                 <h3>What Next ?</h3>
-                <!-- <div class="filter-options">
-                    <label for="price-filter">Price:</label>
-                    <select id="price-filter">
-                        <option value="all">All</option>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
-                    <label for="rating-filter">Rating:</label>
-                    <select id="rating-filter">
-                        <option value="all">All</option>
-                        <option value="3">3 Stars & Up</option>
-                        <option value="4">4 Stars & Up</option>
-                        <option value="5">5 Stars</option>
-                    </select>
-                </div>
-                <div id="hotel-cards" class="hotel-cards">
-                </div> -->
-                <button class="btn">View Destinations</button>
-                <button class="btn">Find Hotels</button>
-                <button class="btn">Enquire Flights</button>
+                
+                <button id="viewDestination" onclick="window.location.href = '/destination?place=delhi'" class="btn">View Destination</button>
+                <button onclick="window.location.href = '/hotels'" class="btn">Find Hotels</button>
+                <button onclick="window.location.href = '/flights'" class="btn">Finder Flights</button>
             </div>
         </aside>
     </main>

@@ -1,9 +1,26 @@
+const destinationInput = document.getElementById('destinationInput');
+const destinationSearchBtn = document.getElementById('destinationSearch');
+
+destinationSearchBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  
+  const destination = destinationInput.value.trim(); 
+  
+  if (destination) {
+    window.location.href = `/destination?place=${encodeURIComponent(destination)}`;
+  } else {
+    alert("Please enter a destination!");
+  }
+});
+
 
 
 
 document.addEventListener('DOMContentLoaded', function() {
   const tabs = document.querySelectorAll('.enquiry-tab');
   const forms = document.querySelectorAll('.enquiry-form');
+
+
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {

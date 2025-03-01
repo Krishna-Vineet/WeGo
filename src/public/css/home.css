@@ -255,7 +255,7 @@ h1, h2, h3, h4, h5, h6 {
   img {
     width: 100%;
     scale: 1.2;
-    transform: translateY(-5.12%);
+    transform: translateY(-27px);
   }
 }
 .btn-group {

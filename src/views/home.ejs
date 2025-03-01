@@ -21,11 +21,7 @@
                 <li><a href="#why-us">Why WeGo</a></li>
                 <li><a href="#footer">Contact</a></li>
             </ul>
-             <!-- <%# if (user) { %>
-              <a onclick="window.location.href=`/profile/<%= user._id %>`" class="avatar"><img class="avatar-img" src="<%= user.profileImage %>" alt="avatar"><span>Vineet</span></a>
-              <%# } else { %>
-                <a onclick="window.location.href = `/auth`" class="btn">Sign up</a>
-            <%# } %> -->
+          
             <% if (user) { %>
               <div onclick="window.location.href=`/profile/<%= user._id %>`" class="user-profile">
                 <img class="user-avatar" src="<%= user.profileImage %>" alt="avatar">
@@ -44,8 +40,8 @@
             <div class="container">
                 <h1 class="hero-title">Explore. Dream. Discover.</h1>
                 <div class="search-bar">
-                    <input type="text" placeholder="Search amazing destinations...">
-                    <div class="hero-btn"><button><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                    <input id="destinationInput" type="text" placeholder="Search amazing destinations...">
+                    <div id="destinationSearch" class="hero-btn"><button><i class="fa-solid fa-magnifying-glass"></i></button></div>
                 </div>
             </div>
         </section>
@@ -98,7 +94,7 @@
                 
     <div id="cards">
         <div id="cardsWrapper">
-          <div class="card">
+          <div onclick="window.location.href='/destination?place=Rome'" class="card">
             <div class="image" style="background-image: url(/img/popular-1.jpg)">
               <div class="screen"></div>
               <div class="text">
@@ -107,7 +103,7 @@
               </div>
             </div>
           </div>
-          <div class="card">
+          <div onclick="window.location.href='/destination?place=Paris'" class="card">
             <div class="image" style="background-image: url(/img/popular-2.jpg)">
               <div class="screen"></div>
               <div class="text">
@@ -116,7 +112,7 @@
               </div>
             </div>
           </div>
-          <div class="card">
+          <div onclick="window.location.href='/destination?place=Kyoto'" class="card">
             <div class="image" style="background-image: url(/img/popular-3.jpg)">
               <div class="screen"></div>
               <div class="text">
@@ -125,30 +121,32 @@
               </div>
             </div>
           </div>
-          <div class="card">
+          <div onclick="window.location.href='/destination?place=TajMahal'" class="card">
             <div class="image" style="background-image: url(/img/populer1.jpeg)">
               <div class="screen"></div>
               <div class="text">
-                <h2>New York, USA <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span></h2>
-                <p>Explore the bustling streets of New York City, the renowned landmarks, and vibrant nightlife.</p>
+                <h2>Taj Mahal, Agra <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></h2>
+                <p>White marble marvel in Agra, a symbol of love and a UNESCO World Heritage Site.</p>
+
               </div>
             </div>
           </div>
-          <div class="card">
+          <div onclick="window.location.href='/destination?place=QutubMinar'" class="card">
             <div class="image" style="background-image: url(/img/populer2.jpeg)">
               <div class="screen"></div>
               <div class="text">
-                <h2>Sydney, Aus <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star-half-stroke"></i></span></h2>
-                <p>Enjoy the stunning Sydney Harbour, iconic Opera House, and world-famous Bondi Beach.</p>
+                <h2>Qutub Minar <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span></h2>
+                <p>73-meter tall minaret in Delhi, showing Indo-Islamic architecture and carvings.</p>
+
               </div>
             </div>
           </div>
-          <div class="card">
+          <div onclick="window.location.href='/destination?place=RedFort'" class="card">
             <div class="image" style="background-image: url(/img/populer3.jpeg)">
               <div class="screen"></div>
               <div class="text">
-                <h2>Cape Town, SA <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span></h2>
-                <p>Marvel at the natural beauty with its breathtaking views from Table Mountain and rich cultural heritage.</p>
+                <h2>Red Fort, Delhi <span><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></h2>
+                <p>Visit the historic fortification in Delhi as a symbol of India's rich history.</p>
               </div>
             </div>
           </div>

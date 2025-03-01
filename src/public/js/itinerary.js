@@ -61,6 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const days = document.getElementById('days').value || null;
         const hours = document.getElementById('hours').value || null;
         const selectedInterests = Array.from(interestContainer.children).map(chip => chip.dataset.value);
+
+        document.getElementById('viewDestination').addEventListener('click', () => {window.location.href = `/destination?place=${destination}`});
         
         const data = {
             destination: destination,
@@ -103,9 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <span class="activity-place">${activity.place}</span>
                                     <span class="activity-description">${activity.description}</span>
                                     </div>
-                                    <button onclick="parentElement.outerHTML = ''" class="remove-btn">Remove</button>
+                                    
                                  </div>`;
                     });
+                    // <button onclick="parentElement.outerHTML = ''" class="remove-btn">Remove</button>
             
                     html += `</div>`;
                 });

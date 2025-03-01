@@ -1,3 +1,7 @@
+
+
+const userId = document.getElementById("userID").textContent; // Sample user ID for demonstration
+
 // Sample data for demonstration
 
 const PostedTrips = [
@@ -28,8 +32,8 @@ const PostedTrips = [
   {
     id: "p2",
     destination: "Mumbai, Maharashtra",
-    startDate: "2025-04-10",
-    endDate: "2025-04-17",
+    startDate: "2025-03-10",
+    endDate: "2025-03-17",
     companionsNeeded: 3,
     description: "City exploration and food tour.",
     status: "upcoming",
@@ -45,14 +49,39 @@ const PostedTrips = [
   {
     id: "p3",
     destination: "Goa",
-    startDate: "2025-01-05",
-    endDate: "2025-01-12",
+    startDate: "2025-03-05",
+    endDate: "2025-03-12",
     companionsNeeded: 4,
     description: "Beach vacation and water sports.",
     status: "completed",
     interestedUsers: [],
   },
 ];
+
+
+fetch(`/trippost/user/${userId}`, { method: "GET" })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data.data);
+    const formattedPosts = data.data.map((post) => ({
+      id: post._id,
+      destination: post.destination,
+      startDate: post.startDate,
+      endDate: post.endDate,
+      companionsNeeded: post.companionsNeeded,
+      description: post.description,
+      status: post.status,
+      interestedUsers: post.interestedUsers.map((user) => ({
+        userId: user._id,
+        name: user.name,
+        contact: user.contact,
+        comment: user.comment,
+      })),
+    }));
+    PostedTrips.push(...formattedPosts);
+    renderPostedTrips("upcoming");
+  })
+
 
 const AvailableTrips = [
   {
@@ -63,7 +92,7 @@ const AvailableTrips = [
     companionsNeeded: 3,
     description: "Mountain hiking and snow activities.",
     postedBy: "Amit Gupta",
-    postedDate: "2025-02-15",
+    postedDate: "2025-03-01",
     userInterested: false,
   },
   {
@@ -74,21 +103,49 @@ const AvailableTrips = [
     companionsNeeded: 2,
     description: "Cultural exploration and historical sites.",
     postedBy: "Neha Khanna",
-    postedDate: "2025-02-20",
+    postedDate: "2025-03-01",
     userInterested: true,
   },
   {
     id: "a3",
     destination: "Kochi, Kerala",
-    startDate: "2025-03-10",
-    endDate: "2025-03-18",
+    startDate: "2025-03-01",
+    endDate: "2025-03-08",
     companionsNeeded: 4,
     description: "Backwater tour and beach relaxation.",
     postedBy: "Vikram Reddy",
-    postedDate: "2025-02-10",
+    postedDate: "2025-03-01",
     userInterested: false,
   },
 ];
+
+fetch("/trippost/available", { method: "GET" })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch available trips");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data.data); // Log the fetched data for debugging
+    const formattedPosts = data.data.map((post) => ({
+      id: post.id,
+      destination: post.destination,
+      startDate: post.startDate,
+      endDate: post.endDate,
+      companionsNeeded: post.companionsNeeded,
+      description: post.description,
+      postedBy: post.postedBy,
+      postedDate: post.postedDate,
+      userInterested: post.userInterested, // Already calculated by the back-end
+    }));
+    AvailableTrips.push(...formattedPosts);
+    renderAvailableTrips();
+  })
+  .catch((error) => {
+    console.error("Error fetching available trips:", error);
+    alert("Failed to load available trips. Please try again.");
+  });
 
 // Helper functions
 function formatDate(dateString) {
@@ -128,47 +185,84 @@ function renderAvailableTrips(filteredTrips = AvailableTrips) {
     const postedDate = formatDate(trip.postedDate);
 
     tripCard.innerHTML = `
-                    <div class="trip-actions" style="margin-top: 1rem; float: right; top: 20px; margin-right: 20px;">
-                        <button class="btn ${trip.userInterested ? "btn-secondary" : "btn-primary"} interested-btn" data-trip-id="${trip.id}">
-                            ${trip.userInterested ? "Interest Shown ✓" : "I am Interested"}
-                        </button>
-                    </div>
-                    <div class="trip-destination">${trip.destination}</div>
-                    <div class="trip-dates">From ${startDate} to ${endDate}</div>
-                    <div class="trip-companions">Companions needed: ${trip.companionsNeeded}</div>
-                    <p>${trip.description}</p>
-                    <div style="margin-top: 0.5rem; font-size: 0.8rem;">
-                        Posted by ${trip.postedBy} on ${postedDate}
-                    </div>
-                `;
+      <div class="trip-actions" style="margin-top: 1rem; float: right; top: 20px; margin-right: 20px;">
+        <button class="btn ${trip.userInterested ? "btn-secondary" : "btn-primary"} interested-btn" data-trip-id="${trip.id}">
+          ${trip.userInterested ? "Interest Shown ✓" : "I am Interested"}
+        </button>
+      </div>
+      <div class="trip-destination">${trip.destination}</div>
+      <div class="trip-dates">From ${startDate} to ${endDate}</div>
+      <div class="trip-companions">Companions needed: ${trip.companionsNeeded}</div>
+      <p>${trip.description}</p>
+      <div style="margin-top: 0.5rem; font-size: 0.8rem;">
+        Posted by ${trip.postedBy} on ${postedDate}
+      </div>
+
+      <!-- Modal for showing interest -->
+      <div id="modal-${trip.id}" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 300px;">
+          <h3>Express Interest</h3>
+          <textarea id="comment-${trip.id}" placeholder="Write a comment (optional)" style="width: 100%; height: 100px; margin-bottom: 10px;"></textarea>
+          <button id="confirm-interest-${trip.id}" class="btn btn-primary" style="margin-right: 10px;">Confirm</button>
+          <button id="cancel-interest-${trip.id}" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+    `;
 
     availableTripsContainer.appendChild(tripCard);
-  });
 
-  // Add event listeners to buttons
-  addTripCardEventListeners();
-}
-
-// Function to add event listeners to trip cards
-function addTripCardEventListeners() {
-  document.querySelectorAll(".interested-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const tripId = btn.getAttribute("data-trip-id");
-      const trip = AvailableTrips.find((t) => t.id === tripId);
-
-      if (trip && !trip.userInterested) {
-        trip.userInterested = true;
-        btn.textContent = "Interest Shown ✓";
-        btn.classList.remove("btn-primary");
-        btn.classList.add("btn-secondary");
-        alert(
-          `You've expressed interest in this trip! The trip organizer will contact you.`
-        );
-      }
-    });
+    // Add event listeners to the modal buttons
+    addTripCardEventListeners(trip);
   });
 }
+function addTripCardEventListeners(trip) {
+  const modal = document.getElementById(`modal-${trip.id}`);
+  const confirmButton = document.getElementById(`confirm-interest-${trip.id}`);
+  const cancelButton = document.getElementById(`cancel-interest-${trip.id}`);
+  const commentInput = document.getElementById(`comment-${trip.id}`);
+  const interestButton = document.querySelector(`[data-trip-id="${trip.id}"]`);
 
+  // Open modal when the "I am Interested" button is clicked
+  interestButton.addEventListener("click", () => {
+    if (!trip.userInterested) {
+      modal.style.display = "block";
+    }
+  });
+
+  // Close modal when the "Cancel" button is clicked
+  cancelButton.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Confirm interest and make API call
+  confirmButton.addEventListener("click", async () => {
+    const comment = commentInput.value.trim(); // Optional comment
+
+    try {
+      // Call the API to mark interest
+      console.log(trip.id);
+      console.log(userId);
+      
+      await fetch(`/trippost/join/${trip.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ comment }),
+      });
+
+      // Update the UI
+      trip.userInterested = true;
+      interestButton.textContent = "Interest Shown ✓";
+      interestButton.classList.remove("btn-primary");
+      interestButton.classList.add("btn-secondary");
+
+      modal.style.display = "none"; // Close the modal
+      alert("You've successfully expressed interest in this trip!");
+    } catch (error) {
+      console.error("Error marking interest:", error);
+      alert("Failed to express interest. Please try again.");
+    }
+  });
+}
 // Function to render posted trips
 function renderPostedTrips(status) {
   const filteredTrips = PostedTrips.filter(
@@ -188,6 +282,8 @@ function renderPostedTrips(status) {
     // Format dates
     const startDate = formatDate(trip.startDate);
     const endDate = formatDate(trip.endDate);
+    console.log(trip.interestedUsers);
+    
 
     tripCard.innerHTML = `
                     <div class="trip-destination">${trip.destination}</div>
@@ -215,7 +311,7 @@ function renderPostedTrips(status) {
                     </div>
                     <div class="interested-users" id="interested-${trip.id}">
                         <h4>Interested Users</h4>
-                        ${
+                        ${                        
                           trip.interestedUsers.length > 0
                             ? trip.interestedUsers
                                 .map(
@@ -228,9 +324,6 @@ function renderPostedTrips(status) {
                                     <div>
                                     <button style="margin-right: 10px;" class="btn btn-small btn-primary contact-user" data-user-contact="${user.contact}" data-user-id="${user.userId}" data-trip-id="${trip.id}">
                                         Contact
-                                    </button>
-                                    <button class="btn btn-small btn-primary approve-user" data-user-id="${user.userId}" data-trip-id="${trip.id}">
-                                        Approve
                                     </button>
                                     </div>
                                 </div>
@@ -292,22 +385,6 @@ function addPostedTripEventListeners() {
     });
   });
 
-  document.querySelectorAll(".approve-user").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const tripId = btn.getAttribute("data-trip-id");
-      const userId = btn.getAttribute("data-user-id");
-      const trip = PostedTrips.find((t) => t.id === tripId);
-      const user = trip?.interestedUsers.find((u) => u.userId === userId);
-
-      if (trip && user) {
-        alert(
-          `You've approved ${user.name} to join your trip to ${trip.destination}!`
-        );
-        btn.textContent = "Approved ✓";
-        btn.disabled = true;
-      }
-    });
-  });
 
   document.querySelectorAll(".contact-user").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -434,15 +511,28 @@ postTripForm.addEventListener("submit", (e) => {
   }
 
   const newTrip = {
-    id: `p${PostedTrips.length + 1}`,
     destination,
     startDate,
     endDate,
     companionsNeeded: parseInt(companionsNeeded),
     description,
-    status: "upcoming",
-    interestedUsers: [],
   };
+
+  console.log(newTrip);
+  fetch("/trippost/post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newTrip),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    })
 
   PostedTrips.push(newTrip);
 
