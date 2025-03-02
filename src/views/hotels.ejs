@@ -473,8 +473,6 @@
         <div class="enquiry-bg"></div>
         <div class="container">
             <div class="enquiry-tabs">
-                <button class="enquiry-tab active" data-tab="hotel">Hotel</button>
-                <button class="enquiry-tab" data-tab="flight">Flight</button>
             </div>
             <div class="enquiry-content">
                 <form class="enquiry-form hotel-form active" id="hotel-search-form">
@@ -680,7 +678,7 @@
             const hotels = [
                 {
                     name: "Grand Sunrise Resort",
-                    image: "/api/placeholder/400/320",
+                    image: "https://imgs.search.brave.com/GufDJQdUwCs-Bf3VN3m8WWSldzsNChDmUGHgggCMn8g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU2/ZGZkNWNjOWY3MjY2/ZWQ3ZjA0YjY0ZC8x/NTg1NzQzNzQ0ODAw/LU5JTFBWSTZTU0RZ/U0laUExENTVFL2lt/YWdlLWFzc2V0Lmpw/ZWc",
                     rating: 4.8,
                     priceRange: "₹15,000 - ₹20,000",
                     bookingLink: "https://booking.com/grand-sunrise",
@@ -690,7 +688,7 @@
                 },
                 {
                     name: "Cozy Nest Hotel",
-                    image: "/api/placeholder/400/320",
+                    image: "https://imgs.search.brave.com/U6FyIJp4fzliM1I5-Ti4WVSA-edbixcwqTsMA79vlDc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU2/ZGZkNWNjOWY3MjY2/ZWQ3ZjA0YjY0ZC8x/NTg1NzQzNzQ2Mjky/LUdRWFdDTUoxWFQ1/SkxWWUo1VUNVL2lt/YWdlLWFzc2V0Lmpw/ZWc",
                     rating: 4.5,
                     priceRange: "₹8,000 - ₹12,000",
                     bookingLink: "https://booking.com/cozy-nest",
@@ -700,7 +698,7 @@
                 },
                 {
                     name: "Riverside Retreat",
-                    image: "/api/placeholder/400/320",
+                    image: "https://imgs.search.brave.com/QyDqWmFGbPTD0IBxWjJYzTBbVfhegyj0qtBiU57grW4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU2/ZGZkNWNjOWY3MjY2/ZWQ3ZjA0YjY0ZC8x/NTg1NzQzNzU0MzM4/LTVYMUhTSUY2NUtE/VlZEQTgzUFRKL2lt/YWdlLWFzc2V0Lmpw/ZWc",
                     rating: 4.7,
                     priceRange: "₹12,000 - ₹18,000",
                     bookingLink: "https://booking.com/riverside-retreat",
@@ -710,7 +708,7 @@
                 },
                 {
                     name: "Urban Central Hotel",
-                    image: "/api/placeholder/400/320",
+                    image: "https://imgs.search.brave.com/LSRZ35I7qQVKFrVJs6zC3Ad6GbweFGOWdShjVENqA7Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU2/ZGZkNWNjOWY3MjY2/ZWQ3ZjA0YjY0ZC8x/NTg1NzQzNzUxMDg1/LU4yMzE3QjdLM0ky/WUJaSFBIRU5PL2lt/YWdlLWFzc2V0Lmpw/ZWc",
                     rating: 4.2,
                     priceRange: "₹7,000 - ₹10,000",
                     bookingLink: "https://booking.com/urban-central",
@@ -720,7 +718,7 @@
                 },
                 {
                     name: "Mountain View Lodge",
-                    image: "/api/placeholder/400/320",
+                    image: "https://imgs.search.brave.com/s3S1Fj8ANtFb9R5p3zGrt2nLxm8QZ8rm3Z39CAvmThY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5hZG1pZGRsZWVh/c3QuY29tL3Bob3Rv/cy82NmIzNTYwMDUy/MTA2MDRlNjJjODQ3/ZTQvbWFzdGVyL3df/MTYwMCxjX2xpbWl0/L0FuYW5kYV9QYWxh/Y2UlMjBhbmQlMjBW/YWxsZXkuanBn",
                     rating: 4.9,
                     priceRange: "₹20,000 - ₹25,000",
                     bookingLink: "https://booking.com/mountain-view",
@@ -730,7 +728,7 @@
                 },
                 {
                     name: "Budget Stay Inn",
-                    image: "/api/placeholder/400/320",
+                    image: "https://imgs.search.brave.com/0LWG62ofTc7a53ZrqNmnrv3P9fswNJZQKxU_O4koPVU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzU2/ZGZkNWNjOWY3MjY2/ZWQ3ZjA0YjY0ZC8x/NTg1NzQzNzU3MjE2/LTBPNlAwSUFKQ085/WE5ZVVU5R0JFL2lt/YWdlLWFzc2V0Lmpw/ZWc",
                     rating: 3.8,
                     priceRange: "₹3,000 - ₹5,000",
                     bookingLink: "https://booking.com/budget-stay",
