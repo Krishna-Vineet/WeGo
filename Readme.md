@@ -1,5 +1,5 @@
 
-# 🌍 WeGo – Your AI Travel Companion
+# 🌍 WeGo – Your AI Travel Companion [Visit Site](https://wego-theta.vercel.app/)
 
 **“We Encourage Going On...”**  
 A full-stack AI-powered travel platform to help you discover destinations, plan smarter itineraries, find companions, and manage your entire trip—all in one place.
@@ -246,7 +246,7 @@ wego/
 
 ## 🔗 Live URL
 
-> Coming soon...
+> [Click here to visit Wego](https://wego-theta.vercel.app/)
 
 ---
 
