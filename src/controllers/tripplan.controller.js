@@ -1,7 +1,7 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiErrors.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import TripPlan from "../models/tripPlan.model.js";
+import TripPlan from "../models/tripplan.model.js";
 import User from "../models/user.model.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
